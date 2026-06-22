@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>麻将胡了 · 再访手记</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5faf9;
+      color: #1a2e2b;
+      line-height: 1.6;
+      padding: 0 1.25rem 3rem;
+    }
+
+    .page-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* header / hero */
+    .hero {
+      padding: 3rem 0 1.8rem;
+      text-align: center;
+      border-bottom: 1px solid #c8e0dc;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #0d4a44;
+    }
+
+    .hero .tagline {
+      margin-top: 0.5rem;
+      font-size: 1.05rem;
+      color: #3f6b63;
+      background: #d8eee9;
+      display: inline-block;
+      padding: 0.2rem 1rem;
+      border-radius: 100px;
+    }
+
+    /* 叙述块 */
+    .story-block {
+      margin-top: 2rem;
+    }
+
+    .story-block p {
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      color: #1f3a35;
+    }
+
+    .story-block p.lead {
+      font-size: 1.1rem;
+      font-weight: 450;
+      border-left: 4px solid #298d7c;
+      padding-left: 1rem;
+      background: #eef7f4;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .story-block a {
+      color: #1b7665;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .story-block a:hover {
+      border-bottom-color: #1b7665;
+    }
+
+    /* 网格卡片 (特点) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 2.2rem 0 1.8rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.25rem 1rem;
+      box-shadow: 0 4px 12px rgba(0, 60, 50, 0.06);
+      border: 1px solid #d5eae5;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(34, 120, 100, 0.08);
+    }
+
+    .card .emoji-icon {
+      display: inline-block;
+      font-size: 1.6rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #0d4a44;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #34665c;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    /* 温和引用 / 提示区块 */
+    .note-box {
+      background: #e3f3ef;
+      border-radius: 24px;
+      padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+      margin: 2rem 0;
+      border-left: 4px solid #1c8470;
+    }
+
+    .note-box p {
+      margin-bottom: 0.3rem;
+      font-size: 0.98rem;
+      color: #17453e;
+    }
+
+    .note-box .small-head {
+      font-weight: 500;
+      color: #0b5e50;
+      letter-spacing: 0.02em;
+    }
+
+    /* FAQ 摘要（简洁问与答） */
+    .faq-mini {
+      margin: 2.2rem 0 1.5rem;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 18px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid #d2e7e1;
+    }
+
+    .faq-item .q {
+      font-weight: 500;
+      color: #0b5a4c;
+      font-size: 0.98rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item .a {
+      color: #2b5a50;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .faq-item .a a {
+      color: #1b7665;
+      border-bottom: 1px dotted;
+      text-decoration: none;
+    }
+
+    /* 温和结尾 */
+    .closing {
+      margin: 2.5rem 0 0.5rem;
+      text-align: center;
+      padding: 1.8rem 1rem;
+      background: #dceeeb;
+      border-radius: 60px 60px 20px 20px;
+    }
+
+    .closing p {
+      font-size: 1.05rem;
+      color: #08473e;
+    }
+
+    .closing .small-note {
+      font-size: 0.85rem;
+      color: #3f6f65;
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    /* 移动端友好 */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .features-grid { grid-template-columns: 1fr; }
+      .card { padding: 1rem 0.9rem; }
+      .note-box { padding: 1.2rem; }
+      .closing { border-radius: 30px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+  <!-- hero -->
+  <header class="hero">
+    <h1>再次遇见 · 麻将胡了</h1>
+    <div class="tagline">收藏 · 常看 · 细品</div>
+  </header>
+
+  <!-- 故事叙述式主体 -->
+  <div class="story-block">
+    <p class="lead">有些东西，值得第二次打开。</p>
+
+    <p>第一次访问 <a href="https://m-majiang.com">麻将胡了</a> 的时候，你可能只是匆匆浏览了几张牌面。但当你再次回到这里，会发觉那些布局、术语和节奏，原来都藏着清晰的逻辑。如果你已经收藏过这个页面，那么今天的内容可以当作一次温和的复习——也或许能发现上次忽略的细节。</p>
+
+    <p>麻将胡了并不仅仅是一个名称。它背后是一套围绕麻将知识、牌型演变与娱乐场景的内容体系。从基础的和牌规则到不同地区的变体，站点尝试用结构化的方式呈现，让新手也能慢慢读懂那些“听、碰、杠、胡”背后的决策线。这也是为什么持续关注它的理由：内容在更新，理解也在加深。</p>
+  </div>
+
+  <!-- 特点卡片（网格） -->
+  <div class="features-grid">
+    <div class="card">
+      <span class="emoji-icon">🧩</span>
+      <h3>牌型拆解</h3>
+      <p>从顺子、刻子到特殊牌型，每一步都有简明注释，帮助你看清组合逻辑。</p>
+    </div>
+    <div class="card">
+      <span class="emoji-icon">📚</span>
+      <h3>地域变体</h3>
+      <p>覆盖广东、四川、日本等主流规则差异，同一手牌在不同规则下可能完全不同。</p>
+    </div>
+    <div class="card">
+      <span class="emoji-icon">🔍</span>
+      <h3>术语速查</h3>
+      <p>“立直”“自摸”“抢杠”…… 每个术语都配上场景说明，不再靠猜。</p>
+    </div>
+    <div class="card">
+      <span class="emoji-icon">🔄</span>
+      <h3>常看常新</h3>
+      <p>站点不定期补充经典牌局分析与小技巧，适合保持一个书签位。</p>
+    </div>
+  </div>
+
+  <!-- 提示 / 温和插入 -->
+  <div class="note-box">
+    <p><span class="small-head">💡 再次访问的小建议</span></p>
+    <p>如果你之前只是扫了一遍，这次可以试着从“役种”或“符数计算”开始看。把页面加入浏览器书签，或者记下名字，下次再进来时会有不一样的熟悉感。<br>
+    其实，<a href="https://m-majiang.com">麻将胡了</a> 的内容并不庞大，但每一部分都留有思考空间。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <div class="faq-item">
+      <div class="q">❓ 页面内容适合完全没接触过麻将的人吗？</div>
+      <div class="a">可以。基础规则和术语部分从零开始解释，但也保留了供进阶者参考的细节。建议先浏览“牌型拆解”卡片。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">❓ 是否需要经常回来查看更新？</div>
+      <div class="a">不强制，但如果你对麻将规则或变体感兴趣，把 <a href="https://m-majiang.com">麻将胡了</a> 加入收藏夹，偶尔回访会发现内容有补充。频率不高，但每次都有质量。</div>
+    </div>
+    <div class="faq-item">
+      <div class="q">❓ 网站有没有社区或讨论区？</div>
+      <div class="a">目前以内容展示为主，没有开放评论区。不过你可以通过页面上的信息渠道保持关注。</div>
+    </div>
+  </div>
+
+  <!-- 温和结尾 -->
+  <div class="closing">
+    <p>保持好奇，慢慢琢磨。<br>一局牌有一局牌的道理，一个站点有一个站点的脉络。</p>
+    <p class="small-note">收藏即约定 · 下次再来，或许又有新发现</p>
+  </div>
+
+  <!-- 隐形种子（仅供变化用，不显示） -->
+  <span style="display:none;">8abc2f92cdf3ee8d</span>
+</div>
+</body>
+</html>

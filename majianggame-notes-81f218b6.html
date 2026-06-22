@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2">
+  <title>麻将胡了 · 简明指南与访问提醒</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+      background: #eaf7f5;
+      color: #1b3b3a;
+      line-height: 1.6;
+      padding: 1.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+    }
+
+    /* 杂志式 Hero 横幅 */
+    .hero {
+      background: linear-gradient(145deg, #1b5c5a 0%, #2b7b78 100%);
+      padding: 3.5rem 2rem 2.5rem;
+      border-radius: 48px 48px 32px 32px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 12px 28px -8px rgba(27, 91, 90, 0.35);
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      right: -30px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      word-break: keep-all;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    .hero h1 small {
+      font-size: 1.6rem;
+      font-weight: 300;
+      display: block;
+      opacity: 0.9;
+      margin-top: 0.3rem;
+    }
+    .hero p {
+      max-width: 640px;
+      margin: 1rem auto 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+      line-height: 1.7;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(2px);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #d5f1ee;
+      margin-top: 1rem;
+      letter-spacing: 0.3px;
+    }
+
+    /* 背景说明 —— 杂志式引用块 */
+    .context-card {
+      background: #ffffffdd;
+      backdrop-filter: blur(4px);
+      border-left: 6px solid #2b7b78;
+      border-radius: 20px;
+      padding: 2rem 2rem 1.8rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.03);
+    }
+    .context-card h2 {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: #1b5c5a;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .context-card h2::before {
+      content: '◆';
+      color: #2b7b78;
+      font-size: 1.1rem;
+    }
+    .context-card p {
+      color: #2a4a48;
+    }
+
+    /* 三段自然介绍 · 网格卡片 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+      margin: 2.2rem 0 2.8rem;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 1.5rem 2rem;
+      box-shadow: 0 10px 20px -8px rgba(27, 91, 90, 0.08);
+      transition: transform 0.2s, box-shadow 0.25s;
+      border: 1px solid #d2e9e5;
+      display: flex;
+      flex-direction: column;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px -12px rgba(27, 91, 90, 0.18);
+      border-color: #aad0cc;
+    }
+    .feature-card em {
+      font-style: normal;
+      font-size: 2rem;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+      display: inline-block;
+      background: #e2f3f0;
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1b5c5a;
+    }
+    .feature-card h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 0.6rem 0 0.5rem;
+      color: #1e4f4d;
+    }
+    .feature-card p {
+      color: #3c5f5c;
+      font-size: 0.96rem;
+      flex: 1;
+    }
+
+    /* 提示 + FAQ 摘要 */
+    .tip-faq {
+      background: #ffffffc9;
+      backdrop-filter: blur(3px);
+      border-radius: 32px;
+      padding: 2rem 2rem 2.2rem;
+      margin: 2rem 0 2.5rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02);
+      border: 1px solid #c4dfdb;
+    }
+    .tip-faq h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #145251;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tip-faq h2::before {
+      content: '📌';
+      font-size: 1.4rem;
+    }
+    .faq-item {
+      padding: 0.9rem 0 0.7rem;
+      border-bottom: 1px dashed #c9dfdb;
+    }
+    .faq-item:last-of-type {
+      border-bottom: none;
+    }
+    .faq-item strong {
+      font-weight: 500;
+      color: #1b5c5a;
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 1.02rem;
+    }
+    .faq-item p {
+      color: #3d615e;
+      font-size: 0.94rem;
+      margin-top: 0.1rem;
+    }
+
+    /* 页尾访问提示 */
+    .footer-note {
+      text-align: center;
+      padding: 2.2rem 1rem 1rem;
+      border-top: 1px solid #bcd6d2;
+      margin-top: 2rem;
+      color: #2f6360;
+    }
+    .footer-note a {
+      color: #1b5c5a;
+      text-decoration: none;
+      font-weight: 470;
+      background: transparent;
+      padding: 0.1rem 0.3rem;
+      border-bottom: 1.5px dotted #2b7b78;
+      transition: border 0.2s, background 0.2s;
+    }
+    .footer-note a:hover {
+      border-bottom-style: solid;
+      background: #d3ece8;
+      border-radius: 4px;
+    }
+    .footer-note .highlight-link {
+      font-weight: 500;
+    }
+
+    .footer-note .meta {
+      font-size: 0.85rem;
+      opacity: 0.75;
+      margin-top: 1rem;
+    }
+
+    /* 移动端精调 */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 2.2rem 1.2rem 2rem;
+        border-radius: 32px 32px 24px 24px;
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .hero h1 small {
+        font-size: 1.2rem;
+      }
+      .feature-grid {
+        gap: 1.2rem;
+      }
+      .feature-card {
+        padding: 1.5rem 1.2rem;
+      }
+      .context-card {
+        padding: 1.4rem 1.2rem;
+      }
+      .tip-faq {
+        padding: 1.5rem 1.2rem;
+      }
+      .footer-note {
+        padding: 1.5rem 0.5rem 0.8rem;
+      }
+    }
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .hero p {
+        font-size: 0.98rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 首页横幅 -->
+    <div class="hero">
+      <h1>
+        麻将胡了
+        <small>简明指南 · 从容一刻</small>
+      </h1>
+      <p>
+        从牌张组合到听牌思路，我们把基础规则与常见问点整理成一本随身小册。<br>
+        无论你刚摸到牌墙，还是想复习细节，这里都有一份平静的参考。
+      </p>
+      <span class="badge">✦ 杂志专题 · 实时更新 ✦</span>
+    </div>
+
+    <!-- 背景说明 -->
+    <div class="context-card">
+      <h2>为什么需要一份简明指南</h2>
+      <p>
+        麻将玩法流派多样，术语也因地域稍有不同。我们整合了主流规则中的通用部分，去掉了冗余的解读，只保留真正影响胡牌的核心判断。同时收集了玩家常问的边界情况，比如「听牌后能否换牌」「抢杠的适用条件」—— 每一条都经过核对，不夸大也不含糊。
+      </p>
+    </div>
+
+    <!-- 三段自然介绍（网格卡片） -->
+    <div class="feature-grid">
+      <div class="feature-card">
+        <em>🀄</em>
+        <h3>胡牌结构速览</h3>
+        <p>顺子、刻子、将牌的组合原则，以及七对、全不靠等特殊牌型的判断依据。每种结构都配了简单图示，一眼看清进张和出张方向。</p>
+      </div>
+      <div class="feature-card">
+        <em>🧮</em>
+        <h3>番数·底分逻辑</h3>
+        <p>从平和到满贯，番种叠加顺序与封顶规则。我们整理了常见的计分误区和重复计算案例，帮你避免结算时的分歧。</p>
+      </div>
+      <div class="feature-card">
+        <em>📖</em>
+        <h3>常见问点摘录</h3>
+        <p>「碰牌后能否立即胡牌？」「同一圈内点炮与自摸优先级」—— 摘录自真实对局提问，回答简明，不绕弯子。适合快速查询。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 + 提示 -->
+    <div class="tip-faq">
+      <h2>几则高频问答 · 访问提示</h2>
+
+      <div class="faq-item">
+        <strong>Q：听牌后还能改动手牌吗？</strong>
+        <p>听牌状态下，只要没有发生鸣牌或摸打动作，部分规则允许调整手牌顺序，但不可拆解已经形成的刻子或顺子。具体视地方约定。</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q：关于平台访问的一点提醒</strong>
+        <p>如果你希望在线练习或结合工具理解牌型，可以前往 <a href="https://majianggame.com">麻将胡了</a> 页面查看交互演示，那里有更直观的即时反馈，适合边看边试。</p>
+      </div>
+      <div class="faq-item">
+        <strong>Q：花色与混牌如何界定？</strong>
+        <p>多数规则中字牌（风牌、箭牌）不参与顺子组合，但可以作为刻子或将牌。混牌（万能牌）需提前商定其番种折算方式。</p>
+      </div>
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <div class="footer-note">
+      <p style="font-size: 1.05rem;">
+        专题内容持续修订 · 更多战术分解和规则图解
+        <br>
+        可移步至 <a href="https://majianggame.com" class="highlight-link">麻将胡了</a> 查看完整版。
+      </p>
+      <div class="meta">
+        保持简单的思考 · 享受牌局的节奏
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
